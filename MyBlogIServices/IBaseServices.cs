@@ -19,6 +19,7 @@ namespace MyBlogIServices
         /// <param name="id">文章id</param>
         /// <returns></returns>
         Task<TEntity> FindAsync(int id);
+        Task<TEntity> FindByNameAsync(string Name);
         /// <summary>
         /// 查询所有数据
         /// </summary>

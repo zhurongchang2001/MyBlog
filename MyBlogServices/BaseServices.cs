@@ -53,6 +53,9 @@ namespace MyBlogServices
             return await _services.QueryAsync(func, Page, Size, total);
         }
 
-        
+        public async Task<TEntity> FindByNameAsync(string Name)
+        {
+            return await _services.FindByNameAsync(Name);
+        }
     }
 }

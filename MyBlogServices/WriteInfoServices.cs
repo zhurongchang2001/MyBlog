@@ -14,7 +14,6 @@ namespace MyBlogServices
         public WriteInfoServices(WriteInfoServices writeInfoServices) { 
         base._services = writeInfoServices;
         this.writeInfoServices1 = writeInfoServices;
-        this.writeInfoServices1 = writeInfoServices;
         }
     }
 }

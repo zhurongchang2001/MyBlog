@@ -10,8 +10,8 @@ namespace MyBlogServices
 {
     public class BlogNewsServices:BaseServices<BlogNews>,IBlogNewServices
     {
-        private readonly IBlogNewServices _blogNewServices;
-        public BlogNewsServices(IBlogNewServices iBlogNewServices)
+        private readonly BlogNewsServices _blogNewServices;
+        public BlogNewsServices(BlogNewsServices iBlogNewServices)
         {
             base._services = iBlogNewServices;
             _blogNewServices = iBlogNewServices;

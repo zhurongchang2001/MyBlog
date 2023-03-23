@@ -20,11 +20,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ITypeinfoRepository, TypeInfoRepository>();
 builder.Services.AddScoped<IWriteInfoRepository, WriteInfoRepository>();
 builder.Services.AddScoped<IBaseNewsRepository, BlogNewsRepository>();
-
 /*builder.Services.AddScoped<ITypeInfoServices, TypeInfoServices>();
 builder.Services.AddScoped<IWriteInfoServices, WriteInfoServices>();
 builder.Services.AddScoped<IBlogNewServices, BlogNewsServices>();*/
-
 #endregion
 
 #region swagger 注释  详情：https://blog.csdn.net/easyboot/article/details/129733043

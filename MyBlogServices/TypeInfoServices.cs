@@ -14,7 +14,7 @@ namespace MyBlogServices
         public TypeInfoServices(TypeInfoServices typeInfoServices)
         {
             base._services = typeInfoServices;
-            this.typeInfoServices1 = typeInfoServices;
+            typeInfoServices1 = typeInfoServices;
         }
     }
 }

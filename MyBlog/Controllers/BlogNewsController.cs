@@ -96,5 +96,30 @@ namespace MyBlog.Controllers
                 return ApiResultHelp.Error("该数据不存在,数据删除失败");
             }
         }
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="BlognewsId">数据id</param>
+        /// <param name="Title">标题</param>
+        /// <param name="Context">内容</param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<ActionResult<ApiResult>> UpdateBlogNewById(int BlognewsId, string Title, string Context) { 
+            var Blognews=await blogNewsService.FindAsync(BlognewsId);
+            if (Blognews == null) {
+                return ApiResultHelp.Error("该数据不存在");
+            }
+            Blognews.Title = Title;
+            Blognews.Content = Context;
+
+            bool BlogBoll=await blogNewsService.UpdateAsync(Blognews);
+            if (BlogBoll)
+            {
+                return ApiResultHelp.Success(BlogBoll,"修改成功");
+            }
+            else {
+                return ApiResultHelp.Error("修改失败");
+            }
+        }
     }
 }
