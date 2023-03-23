@@ -1,4 +1,5 @@
-﻿using MyBlog.Model;
+﻿using MyBlog.IRepository;
+using MyBlog.Model;
 using MyBlogIServices;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ namespace MyBlogServices
 {
     public class BlogNewsServices:BaseServices<BlogNews>,IBlogNewServices
     {
-        private readonly BlogNewsServices _blogNewServices;
-        public BlogNewsServices(BlogNewsServices iBlogNewServices)
+        private readonly IBlogNewsRepository _blogNewServices;
+        public BlogNewsServices(IBlogNewsRepository iBlogNewServices)
         {
             base._services = iBlogNewServices;
-            _blogNewServices = iBlogNewServices;
+            this._blogNewServices = iBlogNewServices;
         }
     }
 }

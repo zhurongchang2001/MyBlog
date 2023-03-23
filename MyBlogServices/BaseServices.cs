@@ -1,4 +1,5 @@
-﻿using MyBlogIServices;
+﻿using MyBlog.IRepository;
+using MyBlogIServices;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace MyBlogServices
     public class BaseServices<TEntity> : IBaseServices<TEntity> where TEntity : class, new()
     {
         //从子类的构造函数中传入
-        protected IBaseServices<TEntity> _services;
+        protected IBaseRepository<TEntity> _services;
         public async Task<bool> CreateAsync(TEntity entity)
         {
             return await _services.CreateAsync(entity);
@@ -52,10 +53,6 @@ namespace MyBlogServices
         {
             return await _services.QueryAsync(func, Page, Size, total);
         }
-
-        public async Task<TEntity> FindByNameAsync(string Name)
-        {
-            return await _services.FindByNameAsync(Name);
-        }
+       
     }
 }

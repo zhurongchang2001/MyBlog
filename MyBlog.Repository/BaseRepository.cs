@@ -73,10 +73,6 @@ namespace MyBlog.Repository
                 .Where(func)
                 .ToPageListAsync(Page, Size, total);
         }
-
-        public async Task<TEntity> FindAsync(string name)
-        {
-            return await FindAsync(name);
-        }
+        
     }
 }

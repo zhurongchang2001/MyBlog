@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyBlog.IRepository
 {
-    public interface IBaseNewsRepository:IBaseRepository<BlogNews>
+    public interface IBlogNewsRepository:IBaseRepository<BlogNews>
     {
 
     }

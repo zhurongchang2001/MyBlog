@@ -12,8 +12,8 @@ namespace MyBlog.Controllers
     [ApiController]
     public class TypeController : ControllerBase
     {
-        private readonly ITypeinfoRepository _typeResolutionService;
-        public TypeController (ITypeinfoRepository typeResolutionService) {
+        private readonly ITypeInfoServices _typeResolutionService;
+        public TypeController (ITypeInfoServices typeResolutionService) {
         this._typeResolutionService = typeResolutionService;
         }
 

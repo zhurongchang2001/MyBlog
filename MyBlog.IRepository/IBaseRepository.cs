@@ -20,7 +20,6 @@ namespace MyBlog.IRepository
         /// <returns></returns>
         Task<TEntity> FindAsync(int id);
 
-        Task<TEntity> FindAsync(string name);
         /// <summary>
         /// 查询所有数据
         /// </summary>

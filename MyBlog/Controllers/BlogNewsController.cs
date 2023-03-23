@@ -11,8 +11,8 @@ namespace MyBlog.Controllers
     [ApiController]
     public class BlogNewsController : ControllerBase
     {
-        private readonly IBaseNewsRepository blogNewsService;
-        public BlogNewsController(IBaseNewsRepository blogNewServices) {
+        private readonly IBlogNewServices blogNewsService;
+        public BlogNewsController(IBlogNewServices blogNewServices) {
         this.blogNewsService = blogNewServices;
         }
         /// <summary>
