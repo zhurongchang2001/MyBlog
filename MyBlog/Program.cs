@@ -1,9 +1,11 @@
+using Microsoft.OpenApi.Models;
 using MyBlog.IRepository;
 using MyBlog.Repository;
 using MyBlogIServices;
 using MyBlogServices;
 using SqlSugar;
 using SqlSugar.IOC;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +27,13 @@ builder.Services.AddScoped<IBlogNewServices, BlogNewsServices>();*/
 
 #endregion
 
+#region swagger 注释  详情：https://blog.csdn.net/easyboot/article/details/129733043
+builder.Services.AddSwaggerGen(option =>
+{
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    option.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename), true);
+});
+#endregion
 
 #region 注入SqlSugar对象
 builder.Services.AddSqlSugar(new IocConfig()
