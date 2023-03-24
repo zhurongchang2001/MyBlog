@@ -123,10 +123,14 @@ app.UseHttpsRedirection();
 
 /*//跨域配置
 app.UseCors(MyAllowSpecificOrigins);*/
-//授权
-app.UseAuthorization();
-//鉴权
+
+//UseAuthentication 就是鉴权 找出解析请求携带的信息
+//UseAuthorization 授权 权限检查，看看有没有权限
+
+//顺序一定不能错！！！！！！！！！
 app.UseAuthentication();
+app.UseAuthorization();
+
 
 app.MapControllers();
 
