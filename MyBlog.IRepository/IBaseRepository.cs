@@ -19,7 +19,7 @@ namespace MyBlog.IRepository
         /// <param name="id">文章id</param>
         /// <returns></returns>
         Task<TEntity> FindAsync(int id);
-
+        Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> func);
         /// <summary>
         /// 查询所有数据
         /// </summary>

@@ -73,6 +73,12 @@ namespace MyBlog.Repository
                 .Where(func)
                 .ToPageListAsync(Page, Size, total);
         }
-        
+        //根据名称查找数据
+
+        public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> func)
+        {
+            return await base.GetSingleAsync(func);
+        }
+
     }
 }

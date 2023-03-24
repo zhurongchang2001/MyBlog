@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.IRepository;
 using MyBlog.Model;
@@ -14,6 +15,8 @@ namespace MyBlog.Controllers
     /// </summary>
     [Route("Type/[controller]/[action]")]
     [ApiController]
+    [Authorize]//鉴权
+
     public class TypeController : ControllerBase
     {
         private readonly ITypeInfoServices _typeResolutionService;
@@ -124,7 +127,7 @@ namespace MyBlog.Controllers
         public async Task<ActionResult<ApiResult>> GetAllType()
         {
             var TypeInfo = await _typeResolutionService.QueryAsync();
-            if (TypeInfo == null)
+            if (TypeInfo.Count==0)
             {
                 return ApiResultHelp.Error("没有更多数据了");
             }

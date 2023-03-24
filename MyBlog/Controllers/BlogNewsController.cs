@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.IRepository;
 using MyBlog.Model;
@@ -12,6 +13,7 @@ namespace MyBlog.Controllers
     /// </summary>
     [Route("BlogNews/[controller]/[action]")]
     [ApiController]
+    [Authorize]//授权，如果直接写在控制器上，那么默认所有方法都携带   另一种写法是，在方法的上面加这个
     public class BlogNewsController : ControllerBase
     {
         private readonly IBlogNewServices blogNewsService;
