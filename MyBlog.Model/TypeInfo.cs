@@ -10,5 +10,10 @@ namespace MyBlog.Model
     {
         [SugarColumn(ColumnDataType = "nvarchar(20)")]
         public string Name { get; set; }
+
+        public static implicit operator TypeInfo(List<TypeInfo> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

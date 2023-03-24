@@ -7,6 +7,9 @@ using MyBlogIServices;
 
 namespace MyBlog.Controllers
 {
+    /// <summary>
+    /// 博客
+    /// </summary>
     [Route("BlogNews/[controller]/[action]")]
     [ApiController]
     public class BlogNewsController : ControllerBase
