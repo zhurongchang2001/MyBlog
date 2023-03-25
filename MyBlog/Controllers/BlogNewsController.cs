@@ -136,6 +136,7 @@ namespace MyBlog.Controllers
             var BlogNews = await blogNewsService.QueryAsync(page,size,total);
             var BloDto = mapper.Map<List<BlogNewsDTO>>(BlogNews);
             return ApiResultHelp.Success(BloDto,total);
+
         }
     }
 }
