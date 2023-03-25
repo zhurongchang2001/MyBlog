@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.IRepository;
 using MyBlog.Model;
+using MyBlog.Model.DTO;
 using MyBlog.Utility.ApiResult;
 using MyBlogIServices;
+using SqlSugar;
 
 namespace MyBlog.Controllers
 {
@@ -21,13 +24,13 @@ namespace MyBlog.Controllers
         this.blogNewsService = blogNewServices;
         }
         /// <summary>
-        /// 获取所有数据
+        /// 获取当前登陆人的所有数据
         /// </summary>
         /// <returns></returns>
-        /// 
         [HttpGet]
         public async Task<ActionResult<ApiResult>> GetBlogNews() {
-            var data= await blogNewsService.QueryAsync();
+            int id = Convert.ToInt32(this.User.FindFirst("Id").Value);
+            var data= await blogNewsService.QueryAsync(c=>c.WriteId==id);
             if (data == null||data.Count==0) {
                 return ApiResultHelp.Error("没有更多的数据了");
             }
@@ -68,7 +71,7 @@ namespace MyBlog.Controllers
                 Content = Context,
                 TypeId = Typeid,
                 Time = DateTime.Now,
-                WriteId = 1,
+                WriteId = Convert.ToInt32(this.User.FindFirst("Id").Value),//从jwt里获取当前登录用户的id
                 BrowserCount = 0,
                 LikeCount = 0
             };
@@ -125,6 +128,14 @@ namespace MyBlog.Controllers
             else {
                 return ApiResultHelp.Error("修改失败");
             }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<ApiResult>> GetPage([FromServices]IMapper mapper,int page,int size) {
+            RefAsync<int> total = 0;
+            var BlogNews = await blogNewsService.QueryAsync(page,size,total);
+            var BloDto = mapper.Map<List<BlogNewsDTO>>(BlogNews);
+            return ApiResultHelp.Success(BloDto,total);
         }
     }
 }

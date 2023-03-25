@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MyBlog.IRepository;
 using MyBlog.Repository;
+using MyBlog.Utility;
 using MyBlogIServices;
 using MyBlogServices;
 using SqlSugar;
@@ -96,20 +97,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             });
 #endregion
 
-/*#region 跨域配置
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      builder =>
-                      {
-                          builder.WithOrigins("http://localhost:7037", "*")
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
-                      });
-});
-#endregion*/
-
+#region AutoMapper注入
+//typeof(类)AutoMapper
+builder.Services.AddAutoMapper(typeof(CustomAutoMapperProfile));
+#endregion
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
