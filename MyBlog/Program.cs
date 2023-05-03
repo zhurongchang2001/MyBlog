@@ -109,8 +109,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
+app.UseStaticFiles();//启用静态文件中间件，并将当前目录下的wwwroot文件夹作为默认的静态文件目录。
 
 /*//跨域配置
 app.UseCors(MyAllowSpecificOrigins);*/

@@ -124,6 +124,7 @@ namespace MyBlog.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<ApiResult>> GetAllType()
         {
             var TypeInfo = await _typeResolutionService.QueryAsync();

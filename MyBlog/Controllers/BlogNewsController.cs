@@ -14,7 +14,7 @@ namespace MyBlog.Controllers
     /// <summary>
     /// 博客
     /// </summary>
-    [Route("BlogNews/[controller]/[action]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     [Authorize]//授权，如果直接写在控制器上，那么默认所有方法都携带   另一种写法是，在方法的上面加这个
     public class BlogNewsController : ControllerBase
@@ -53,6 +53,14 @@ namespace MyBlog.Controllers
             {
                 return ApiResultHelp.Success(data, "查找");
             }
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<BlogNews>>> GetQuery()
+        {
+            var data = await blogNewsService.QueryAsync();
+            var list = data.ToList(); // 将查询结果转换成 List 对象
+            return list;
         }
 
         /// <summary>
@@ -131,6 +139,7 @@ namespace MyBlog.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<ApiResult>> GetPage([FromServices]IMapper mapper,int page,int size) {
             RefAsync<int> total = 0;
             var BlogNews = await blogNewsService.QueryAsync(page,size,total);
