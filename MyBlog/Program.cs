@@ -11,6 +11,7 @@ using SqlSugar.IOC;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -110,7 +111,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
-app.UseStaticFiles();//启用静态文件中间件，并将当前目录下的wwwroot文件夹作为默认的静态文件目录。
+//app.UseStaticFiles();//启用静态文件中间件，并将当前目录下的wwwroot文件夹作为默认的静态文件目录。
+app.UseStaticFiles(new StaticFileOptions()
+{
+	FileProvider = new PhysicalFileProvider(
+	Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
+	RequestPath = "/Uploads"
+});
+
 
 /*//跨域配置
 app.UseCors(MyAllowSpecificOrigins);*/

@@ -36,28 +36,32 @@ namespace MyBlog.Controllers
             return ApiResultHelp.Success(' ',"图片上传成功");
         }
         [HttpGet]
-        public IActionResult GetAllImages()
-        {
-            var uploadsFolder = Path.Combine(_environment.ContentRootPath, "uploads");
-            var imagePaths = Directory.GetFiles(uploadsFolder, "*.*", SearchOption.AllDirectories)
-                                .Where(s => s.EndsWith(".jpg") || s.EndsWith(".jpeg") || s.EndsWith(".png") || s.EndsWith(".gif"))
-                                .ToList();
-            var images = new List<ImageInfo>();
-            foreach (var path in imagePaths)
-            {
-                var fileInfo = new FileInfo(path);
-                var image = new ImageInfo
-                {
-                    Path = path,
-                    Name = fileInfo.Name
-                };
-                images.Add(image);
-            }
-            return Ok(images);
-        }
-    }
+		public IActionResult GetAllImages()
+		{
+			var uploadsFolder = Path.Combine(_environment.ContentRootPath, "uploads");
+			var imagePaths = Directory.GetFiles(uploadsFolder, "*.*", SearchOption.AllDirectories)
+									.Where(s => s.EndsWith(".jpg") || s.EndsWith(".jpeg") || s.EndsWith(".png") || s.EndsWith(".gif"))
+									.ToList();
+			var images = new List<ImageInfo>();
+			var baseUrl = "http://localhost:7037/Uploads/"; // 设置基本的URL路径
+			foreach (var path in imagePaths)
+			{
+				var fileInfo = new FileInfo(path);
+				var imageName = fileInfo.Name;
+				var imageUrl = baseUrl + imageName; // 将基本URL路径与文件名组合在一起生成完整的URL
+				var image = new ImageInfo
+				{
+					Path = imageUrl, // 将Path属性设置为生成的URL路径
+					Name = imageName
+				};
+				images.Add(image);
+			}
+			return Ok(images);
+		}
 
-    public class ImageInfo
+	}
+
+	public class ImageInfo
     {
         public string Path { get; set; }
         public string Name { get; set; }
