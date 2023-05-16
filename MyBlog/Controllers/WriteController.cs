@@ -33,6 +33,7 @@ namespace MyBlog.Controllers
         /// <param name="Pwd">密码</param>
         /// <returns></returns>
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<ApiResult>> AddWrite(string Name, string UserName,string Pwd) {
             //对用户名进行正则验证，只能允许大小写字母
             bool isValid = Regex.IsMatch(UserName, "^[a-zA-Z]+$");

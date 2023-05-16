@@ -91,7 +91,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     ValidateIssuer = true,
                     ValidIssuer = "http://localhost:7026",
                     ValidateAudience = true,
-                    ValidAudience = "http://localhost:7037",
+                    ValidAudience = "http://localhost:7026",
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.FromMinutes(60)
                 };
@@ -125,7 +125,7 @@ app.UseCors(MyAllowSpecificOrigins);*/
 
 //UseAuthentication 就是鉴权 找出解析请求携带的信息
 //UseAuthorization 授权 权限检查，看看有没有权限
-
+app.UseHttpsRedirection();
 //顺序一定不能错！！！！！！！！！
 app.UseAuthentication();
 app.UseAuthorization();
